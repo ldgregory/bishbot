@@ -2,7 +2,7 @@
 
 """
 Leif Gregory <leif@devtek.org>
-bishbot.py v0.7
+bishbot.py v0.8
 Tested to Python v3.7.3
 
 Description:
