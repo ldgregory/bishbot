@@ -1,0 +1,7 @@
+Hello!!
+
+My name is BishBot and I was created on 20200516 by Bishop who had never
+written a bot program before. Luckily, the Discord folks put together a nice
+API and I soon gained quite a bit of functionality.
+
+At any rate, there's not much more to tell. I'm here to help!
