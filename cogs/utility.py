@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 
 """
+Bishbot - https://github.com/ldgregory/bishbot
 Leif Gregory <leif@devtek.org>
 fun.py v0.1
 Tested to Python v3.7.3
@@ -69,6 +70,38 @@ class Utility(commands.Cog):
     @commands.has_permissions(manage_messages=True)
     async def clear(self, ctx, amount=3):
         await ctx.channel.purge(limit=amount)
+
+#  Cogs ------------------------------------------------------------------------
+    @commands.command(name='load',
+                description='Load a cog',
+                help='Load a cog',
+                ignore_extra=True,
+                hidden=True,
+                enabled=True)
+    async def load(self, ctx, extension):
+        bot.load_extension(f"cogs.{extension.lower()}")
+        await ctx.channel.send(f"Cog {extension.lower()} loaded.")
+
+    @commands.command(name='reload',
+                description='Reload a cog',
+                help='Reload a cog',
+                ignore_extra=True,
+                hidden=True,
+                enabled=True)
+    async def _reload(self, ctx, extension):
+        bot.unload_extension(f"cogs.{extension.lower()}")
+        bot.load_extension(f"cogs.{extension.lower()}")
+        await ctx.channel.send(f"Cog {extension.lower()} reloaded.")
+
+    @commands.command(name='unload',
+                description='Unload a cog',
+                help='Unload a cog',
+                ignore_extra=True,
+                hidden=True,
+                enabled=True)
+    async def unload(self, ctx, extension):
+        bot.unload_extension(f"cogs.{extension.lower()}")
+        await ctx.channel.send(f"Cog {extension.lower()} unloaded.")
 
     @commands.command(name='ip_abuse',
         description='Get abuse score for IP',

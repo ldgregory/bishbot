@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 
 """
+Bishbot - https://github.com/ldgregory/bishbot
 Leif Gregory <leif@devtek.org>
 space.py v0.1
 Tested to Python v3.7.3
