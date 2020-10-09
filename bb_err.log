@@ -1,2 +1,0 @@
-Unhandled message: Command raised an exception: JSONDecodeError: Expecting value: line 1 column 1 (char 0)
-Unhandled message: Command raised an exception: HTTPException: 400 Bad Request (error code: 50006): Cannot send an empty message
