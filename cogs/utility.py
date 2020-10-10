@@ -71,38 +71,6 @@ class Utility(commands.Cog):
     async def clear(self, ctx, amount=3):
         await ctx.channel.purge(limit=amount)
 
-#  Cogs ------------------------------------------------------------------------
-    @commands.command(name='load',
-                description='Load a cog',
-                help='Load a cog',
-                ignore_extra=True,
-                hidden=True,
-                enabled=True)
-    async def load(self, ctx, extension):
-        bot.load_extension(f"cogs.{extension.lower()}")
-        await ctx.channel.send(f"Cog {extension.lower()} loaded.")
-
-    @commands.command(name='reload',
-                description='Reload a cog',
-                help='Reload a cog',
-                ignore_extra=True,
-                hidden=True,
-                enabled=True)
-    async def _reload(self, ctx, extension):
-        bot.unload_extension(f"cogs.{extension.lower()}")
-        bot.load_extension(f"cogs.{extension.lower()}")
-        await ctx.channel.send(f"Cog {extension.lower()} reloaded.")
-
-    @commands.command(name='unload',
-                description='Unload a cog',
-                help='Unload a cog',
-                ignore_extra=True,
-                hidden=True,
-                enabled=True)
-    async def unload(self, ctx, extension):
-        bot.unload_extension(f"cogs.{extension.lower()}")
-        await ctx.channel.send(f"Cog {extension.lower()} unloaded.")
-
     @commands.command(name='ip_abuse',
         description='Get abuse score for IP',
         help='Get abuse score for IP',
@@ -210,7 +178,7 @@ class Utility(commands.Cog):
         ignore_extra=True,
         hidden=False,
         enabled=True)
-    # @commands.has_role('admins')
+    @commands.has_role('admins')
     async def server(self, ctx):
         guild = discord.utils.get(self.bot.guilds, name=GUILD)
         text_channels = '\n - '.join([channel.name for channel in guild.text_channels])

@@ -12,9 +12,6 @@ Channel rules
 Changelog:
 2020601 -  Initial code
 
-Todo:
-Move channel rules to .txt files
-
 Copyright 2020 Leif Gregory
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -69,9 +66,10 @@ class Rules(commands.Cog):
                 f"4. Don't try to derail the story. Add to it!\n")
         else:
             await ctx.channel.send(f"No rules have been defined for this channel. However, here are the general server rules:\n"
-                f"1. Keep it safe for work (no inappropriate language, pictures etc.)\n"
-                f"2. Be civil to each other.\n"
-                f"3. You're adults, you know what's illegal, immoral and inflammatory. Don't post it.")
+                f"1. Don't discuss actual work here, though some discussion about work is ok.\n"
+                f"2. Keep it safe for work (no inappropriate language, pictures etc.)\n"
+                f"3. Be civil to each other.\n"
+                f"4. You're adults, you know what's illegal, immoral and inflammatory. Don't post it.")
 
 
 def setup(bot):
