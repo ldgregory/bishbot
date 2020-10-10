@@ -63,7 +63,7 @@ class TextColor:
     YELLOW = str('\033[1;33m')
 
 
-def random_responses(file):
+def responses(file):
     """
     Loads an array of responses from a txt file.
     This function does not strip \n intentionally.
@@ -102,8 +102,9 @@ def read_file(file):
 
 
 # Load responses
+boss_ids = responses('txt/bb_boss_ids.txt')
 change_nickname_text = read_file('txt/bb_change_nickname.txt')
-change_bot_status_text = random_responses('txt/bb_bot_status.txt')
+change_bot_status_text = responses('txt/bb_bot_status.txt')
 
 
 def main():
@@ -168,7 +169,7 @@ def main():
     # Send a message to general that someone important showed up
     @bot.event
     async def on_member_update(before, after):
-        if str(after.status) == "online" and (str(after.id) == "DISCORD_ID" or str(after.id) == "DISCORD_ID"):
+        if str(after.status) == "online" and str(after.id) in boss_ids:
             channel = discord.utils.get(after.guild.channels, name='general')
             await channel.send(f"Quick!!! Look busy! One of the big bosses are online! ({after.name})")
 
