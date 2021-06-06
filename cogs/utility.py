@@ -10,6 +10,7 @@ Description:
 Fun commands for everyone
 
 Changelog:
+20210606 -  Fixed members command for intents
 20200522 -  Initial code
 
 Copyright 2020 Leif Gregory
@@ -34,7 +35,6 @@ import requests
 from discord.ext import commands
 from dotenv import load_dotenv
 
-
 load_dotenv()
 BOT_PREFIX = os.getenv('DISCORD_BOT_PREFIX')
 GUILD = os.getenv('DISCORD_GUILD')
@@ -51,32 +51,32 @@ class Utility(commands.Cog):
         print('- Utility Cog loaded')
 
     @commands.command(name='ban',
-        description='Ban member from server',
-        help='Ban member from server',
-        ignore_extra=True,
-        hidden=True,
-        enabled=False)
+                description='Ban member from server',
+                help='Ban member from server',
+                ignore_extra=True,
+                hidden=True,
+                enabled=False)
     async def ban(self, ctx, member: discord.member, *, reason=None):
         if member.hasPermission('BAN_MEMBERS'):
             await member.ban(reason=reason)
             await ctx.send(f"Banned {member.mention}")
 
     @commands.command(name='clear',
-        description='Clear x messages, defaults to 3',
-        help='Clear x messages, defaults to 3',
-        ignore_extra=True,
-        hidden=False,
-        enabled=True)
+                description='Clear x messages, defaults to 3',
+                help='Clear x messages, defaults to 3',
+                ignore_extra=True,
+                hidden=False,
+                enabled=True)
     @commands.has_permissions(manage_messages=True)
     async def clear(self, ctx, amount=3):
         await ctx.channel.purge(limit=amount)
 
     @commands.command(name='ip_abuse',
-        description='Get abuse score for IP',
-        help='Get abuse score for IP',
-        ignore_extra=True,
-        hidden=False,
-        enabled=True)
+                description='Get abuse score for IP',
+                help='Get abuse score for IP',
+                ignore_extra=True,
+                hidden=False,
+                enabled=True)
     async def ip_abuse(self, ctx, ipAddress):
         ABUSEIPDB_KEY = os.getenv('ABUSEIPDB_KEY')
         url = 'https://api.abuseipdb.com/api/v2/check'
@@ -101,22 +101,22 @@ class Utility(commands.Cog):
         await ctx.channel.send(data)
 
     @commands.command(name='kick',
-        description='Kick member off server',
-        help='Kick member off server',
-        ignore_extra=True,
-        hidden=True,
-        enabled=False)
+                description='Kick member off server',
+                help='Kick member off server',
+                ignore_extra=True,
+                hidden=True,
+                enabled=False)
     async def kick(self, ctx, member: discord.member, *, reason=None):
         if member.hasPermission('KICK_MEMBERS'):
             await member.kick(reason=reason)
             await ctx.send(f"Kicked {member.mention}")
 
     @commands.command(name='member',
-        description='Member information',
-        help='Member information',
-        ignore_extra=True,
-        hidden=False,
-        enabled=True)
+                description='Member information',
+                help='Member information',
+                ignore_extra=True,
+                hidden=False,
+                enabled=True)
     async def member(self, ctx, mention):
         guild = discord.utils.get(self.bot.guilds, name=GUILD)
         for member in guild.members:
@@ -134,11 +134,11 @@ class Utility(commands.Cog):
                     f"Roles: {str(', '.join([role.name for role in member.roles]).replace('@', ''))}\n")
 
     @commands.command(name='members',
-        description='Current Members',
-        help='Current Members',
-        ignore_extra=True,
-        hidden=False,
-        enabled=True)
+                description='Current Members',
+                help='Current Members',
+                ignore_extra=True,
+                hidden=False,
+                enabled=True)
     async def members(self, ctx, showall=None):
         guild = discord.utils.get(self.bot.guilds, name=GUILD)
         members = ''
@@ -152,11 +152,11 @@ class Utility(commands.Cog):
         await ctx.channel.send(f"**Server Members: {guild.member_count}**\n{members.replace('@', '')}")
 
     @commands.command(name='nickname',
-        description='Change nickname',
-        help='Change nickname',
-        ignore_extra=True,
-        hidden=False,
-        enabled=True)
+                description='Change nickname',
+                help='Change nickname',
+                ignore_extra=True,
+                hidden=False,
+                enabled=True)
     async def nickname(self, ctx, *, nickname):
         await ctx.author.edit(nick=f"{nickname}")
         # role = get(ctx.message.server.roles, name='ROLE_NAME')
@@ -164,20 +164,20 @@ class Utility(commands.Cog):
         #     await client.add_role(ctx.message.author, role)
 
     @commands.command(name='ping',
-        description='Ping latency',
-        help='Ping latency',
-        ignore_extra=True,
-        hidden=False,
-        enabled=True)
+                description='Ping latency',
+                help='Ping latency',
+                ignore_extra=True,
+                hidden=False,
+                enabled=True)
     async def ping(self, ctx):
         await ctx.channel.send(f"Pong... {round(self.bot.latency * 1000)} ms")
 
     @commands.command(name='server',
-        description='Server information',
-        help='Server information',
-        ignore_extra=True,
-        hidden=False,
-        enabled=True)
+                description='Server information',
+                help='Server information',
+                ignore_extra=True,
+                hidden=False,
+                enabled=True)
     @commands.has_role('admins')
     async def server(self, ctx):
         guild = discord.utils.get(self.bot.guilds, name=GUILD)
@@ -194,11 +194,11 @@ class Utility(commands.Cog):
                             f"**Server Members: {guild.member_count}**\n - {members}")
 
     @commands.command(name='unban',
-        description='Unban member from server',
-        help='Unban member from server',
-        ignore_extra=True,
-        hidden=True,
-        enabled=False)
+                description='Unban member from server',
+                help='Unban member from server',
+                ignore_extra=True,
+                hidden=True,
+                enabled=False)
     async def unban(self, ctx, *, member):
         banned_users = await ctx.guild.bans()
         member_name, member_discriminator = member.split('#')
@@ -212,11 +212,11 @@ class Utility(commands.Cog):
                 return
 
     @commands.command(name='weather',
-        description='Weather as !weather CITY STATE',
-        help='Weather as !weather Santa_Fe New_Mexico',
-        ignore_extra=True,
-        hidden=True,
-        enabled=True)
+                description='Weather as !weather CITY STATE',
+                help='Weather as !weather Santa_Fe New_Mexico',
+                ignore_extra=True,
+                hidden=True,
+                enabled=True)
     async def weather(self, ctx, city, state):
         # This intended as a 'good enough' tool. There are some accuracy issues
         # such as conversion of C to F temps and wind_mapping where NNE is
@@ -289,11 +289,11 @@ class Utility(commands.Cog):
             await ctx.channel.send(f"No data found. Make sure to use underscores instead of spaces in city or state, i.e. Sante_Fe New_Mexico")
 
     @commands.command(name='whoami',
-        description='Info about you',
-        help='Info about you',
-        ignore_extra=True,
-        hidden=True,
-        enabled=True)
+                description='Info about you',
+                help='Info about you',
+                ignore_extra=True,
+                hidden=True,
+                enabled=True)
     async def whoami(self, ctx):
         await ctx.channel.send(f"User Name: {ctx.author.name}\nUser ID: {ctx.author.id}")
 

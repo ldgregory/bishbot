@@ -116,7 +116,9 @@ def main():
     ERROR_LOG = os.getenv('DISCORD_ERROR_LOG')
 
     #  Instantiate bot and set prefix to listen for
-    bot = commands.Bot(command_prefix=BOT_PREFIX, case_insensitive=True)
+    intents = discord.Intents.default()
+    intents.members = True
+    bot = commands.Bot(command_prefix=BOT_PREFIX, intents=intents, case_insensitive=True)
     bot_status = cycle(change_bot_status_text)
 
 #  Cogs management
